@@ -884,7 +884,7 @@ func (pgsql *Pgsql) receivedPgsqlResponse(msg *PgsqlMessage) {
 	})
 	trans.BytesOut = msg.Size
 
-	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e6) // resp_time in milliseconds
+	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e3) // resp_time in microseconds
 	trans.Response_raw = common.DumpInCSVFormat(msg.Fields, msg.Rows)
 
 	trans.Notes = append(trans.Notes, msg.Notes...)

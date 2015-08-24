@@ -854,7 +854,7 @@ func (http *Http) receivedHttpResponse(msg *HttpMessage) {
 	trans.Http.Update(response)
 	trans.Notes = append(trans.Notes, msg.Notes...)
 
-	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e6) // resp_time in milliseconds
+	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e3) // resp_time in microseconds
 
 	// save Raw message
 	if http.Send_response {

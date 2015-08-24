@@ -668,7 +668,8 @@ func (redis *Redis) receivedRedisResponse(msg *RedisMessage) {
 	trans.BytesOut = msg.Size
 	trans.Response_raw = msg.Message
 
-	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e6) // resp_time in milliseconds
+	trans.ResponseTime = int32(msg.Ts.Sub(trans.ts).Nanoseconds() / 1e3) // resp_time in microseconds 
+	logp.Debug("redistime", "Redis nanosec %d", msg.Ts.Sub(trans.ts).Nanoseconds())
 
 	redis.publishTransaction(trans)
 
